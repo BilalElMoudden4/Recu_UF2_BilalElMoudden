@@ -1,6 +1,5 @@
 from fastapi import FastAPI, Form
-from services.user_service import crear_usuario
-
+from services.user_service import crear_usuario #Aqui esta el problema
 
 app = FastAPI()
 
@@ -30,4 +29,13 @@ async def crear_usuario(
     
     resultado = await crear_usuario(datos)
     return resultado
+
+
+@app.get("/usuarios/{email}")
+async def leer_usuario(email: str):
+    usuario = await leer_usuario(email)
+    if not usuario:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado") #Falta el import (da probelmas)
+    return usuario
+
 
