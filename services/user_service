@@ -51,3 +51,4 @@ async def leer_usuario(email: str):
         return await conn.fetchrow(query, email)
     finally:
         await conn.close()
+            
