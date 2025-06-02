@@ -61,3 +61,7 @@ async def actualizar_usuario(
     return resultado
 
 
+@app.delete("/usuarios/{email}")
+async def eliminar_usuario(email: str):
+    resultado = await eliminar_usuario(email)
+    return resultado
