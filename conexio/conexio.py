@@ -1,16 +1,6 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+import psycopg2
 
-db_user = 'postgres'
-db_port = 5432
-db_host = 'localhost'
-db_password = 'admin'
-db_name = 'examenRecuFastApi'
-
-uri = f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
-
-engine = create_engine(uri)
-
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-Base = declarative_base
+def conexion():
+    return psycopg2.connect(
+        dbname="examenRecuFastApi", user="postgres", password="admin", host="localhost", port="5432"
+    )
