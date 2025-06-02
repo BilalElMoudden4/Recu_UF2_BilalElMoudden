@@ -1,9 +1,10 @@
 from fastapi import FastAPI, Form
 from services.user_service import crear_usuario #Aqui esta el problema
+#Aqui deberia ir el import del HttpException pero no lo recuerdo
 
 app = FastAPI()
 
-@app.post("/usuarios/",)
+@app.post("/usuarios/",) #Dentro deberia ir algo mas pero no lo recuerdo
 async def crear_usuario(
     nombre: str = Form(...),
     apellido: str = Form(...),
@@ -35,7 +36,7 @@ async def crear_usuario(
 async def leer_usuario(email: str):
     usuario = await leer_usuario(email)
     if not usuario:
-        raise HTTPException(status_code=404, detail="Usuario no encontrado") #Falta el import (da probelmas)
+        raise HTTPException(status_code=404, detail="Usuario no encontrado") #Falta el import!!!!! (da probelmas)
     return usuario
 
 
