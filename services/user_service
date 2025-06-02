@@ -1,0 +1,36 @@
+from conexio.conexio import conexion
+
+async def crear_usuario(datos: dict):
+    """
+    Poner un nuevo usuario en la base de datos
+    """
+    conn = await conexion()
+    try:
+        query = """
+            INSERT INTO usuarios (
+                nombre, 
+                apellido, 
+                email, 
+                descripcion, 
+                curso, 
+                anio, 
+                direccion, 
+                cp, 
+                password
+            )
+        """
+        await conn.execute(
+            query,
+            datos['nombre'],
+            datos['apellido'],
+            datos['email'],
+            datos['descripcion'],
+            datos['curso'],
+            datos['ano'],
+            datos['direccion'],
+            datos['cp'],
+            datos['password']
+        )
+        return {"mensjae": "Hecho con exito"}
+    finally:
+        await conn.close()
