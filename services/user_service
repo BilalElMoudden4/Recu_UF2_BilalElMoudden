@@ -51,4 +51,27 @@ async def leer_usuario(email: str):
         return await conn.fetchrow(query, email)
     finally:
         await conn.close()
+
             
+async def actualizar_usuario(email: str, datos: dict):
+    conn = await conexion()
+    try:
+        campos = []
+        valores = []
+        contador = 1
+        
+        for campo, valor in datos.items():
+            if valor is not None:
+                campos.append(f"{campo} = ${contador}")
+                valores.append(valor)
+                contador += 1
+        
+        if not campos:
+            return {"mensaje": "Todo perfecto"}
+        
+        #Aqui deberian ir mas cosas pero no recuerdo
+        
+    finally:
+        await conn.close()
+        
+        

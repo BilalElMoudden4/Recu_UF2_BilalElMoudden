@@ -40,3 +40,24 @@ async def leer_usuario(email: str):
     return usuario
 
 
+@app.put("/usuarios/{email}")
+async def actualizar_usuario(
+    email: str,
+    apellido: str = Form(None),
+    direccion: str = Form(None)
+):
+    if not apellido and not direccion:
+        raise HTTPException( #Aqui tambien da error por el import que no recuerdo
+            status_code=400,
+            detail="Hay que rellenar minimo 1"
+        )
+    
+    actualizacion = {
+        "apellido": apellido,
+        "direccion": direccion
+    }
+    
+    resultado = await actualizar_usuario(email, actualizacion)
+    return resultado
+
+
